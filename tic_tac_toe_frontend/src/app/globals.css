@@ -1,26 +1,242 @@
-@import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #1976D2;
+  --color-secondary: #424242;
+  --color-accent: #FFD600;
+  --color-bg: #f6f7fb;
+  --color-border: #dee0e3;
+  --color-text: #222;
+}
+html, body {
+  min-height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+a, .accent-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+a:hover, .accent-link:hover {
+  text-decoration: underline;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.auth-container {
+  margin: 3rem auto;
+  padding: 2.5rem 2rem 2rem;
+  max-width: 375px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1.5px solid var(--color-border);
+  box-shadow: 0 3px 16px 0 rgba(25, 118, 210, 0.06);
+  display: flex; flex-direction: column; align-items: stretch;
+}
+.auth-container h2 { text-align: center; }
+
+.auth-form { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 0.5rem;}
+.auth-input {
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #fafbfc;
+}
+.auth-input:focus { border-color: var(--color-primary); }
+.auth-btn {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  padding: 0.7rem;
+  cursor: pointer;
+  margin-top: 0.2rem;
+  transition: background 0.18s;
+}
+.auth-btn:hover { background: #105ea7; }
+.auth-error {
+  color: #d32f2f;
+  font-size: 0.99rem;
+  margin: -0.25rem 0 0.5rem 0;
+}
+.auth-alt {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 1rem;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.main-center-container {
+  max-width: 430px;
+  margin: 3rem auto 0;
+  background: #fff;
+  border-radius: 12px;
+  border: 1.5px solid var(--color-border);
+  box-shadow: 0 2px 9px 0 rgba(25, 118, 210, 0.05);
+  padding: 2rem;
+  display: flex; flex-direction: column; align-items: stretch;
 }
+
+.games-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.divider {
+  margin: 1rem 0;
+  border: none;
+  border-bottom: 1.5px solid var(--color-border);
+}
+.games-join-form {
+  display: flex; gap: 0.6rem; flex-direction: column;
+}
+.btn-primary {
+  background: var(--color-primary);
+  border: none;
+  color: #fff;
+  border-radius: 7px;
+  font-size: 1.08rem;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.22s;
+}
+.btn-primary:hover { background: #125bbe; }
+.btn-secondary {
+  background: var(--color-accent);
+  border: none;
+  color: #222;
+  border-radius: 7px;
+  font-size: 1.05rem;
+  padding: 0.66rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.16s;
+}
+.btn-secondary:hover { background: #ffeb60; }
+
+.game-board-page {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: stretch;
+  background: var(--color-bg);
+}
+.ttt-header {
+  padding: 1rem 0 0.4rem 0.9rem;
+  border-bottom: 1.5px solid var(--color-border);
+  background: #fff;
+  display: flex; align-items: center; gap: 1.9rem;
+}
+.ttt-header h2 {
+  margin: 0; color: var(--color-primary);
+  font-weight: 600;
+}
+.ttt-main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.3rem;
+  padding: 1.5rem 0.7rem 0 0.7rem;
+}
+@media(max-width: 850px) {
+  .ttt-main { flex-direction: column; align-items: center; gap: 1.2rem;}
+}
+
+/* Game board styling */
+.ttt-board-section { display: flex; flex-direction: column; align-items: center; }
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(64px, 1fr));
+  grid-template-rows: repeat(3, minmax(64px, 1fr));
+  gap: 0.45rem;
+  margin-bottom: 1.7rem;
+  margin-top: 1rem;
+  background: #fff;
+  border: 2.5px solid var(--color-primary);
+  border-radius: 10px;
+  padding: 0.85rem;
+  min-width: 204px; min-height: 204px;
+  width: 260px; height: 260px;
+}
+.ttt-cell {
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-primary);
+  border-radius: 7px;
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--color-secondary);
+  cursor: pointer;
+  outline: none;
+  height: 64px; width: 64px;
+  transition: background 0.14s, border 0.18s;
+}
+.ttt-cell:disabled { background: #eceff1; color: #bdbdbd; cursor: not-allowed; }
+.ttt-status {
+  font-size: 1.16rem;
+  margin-bottom: 0.7rem;
+  margin-top: 0.4rem;
+  text-align: center;
+}
+.winner-banner {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+.ttt-mark {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.ttt-aside {
+  min-width: 170px;
+  background: #fafbfc;
+  border-radius: 10px;
+  border: 1.5px solid var(--color-border);
+  padding: 1.1rem 1rem 0.6rem;
+  box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.04);
+  display: flex; flex-direction: column; gap: 1.4rem;
+}
+.ttt-moves-summary { font-size: 1rem; }
+.ttt-moves-summary h4 { margin-bottom: 0.5rem; color: var(--color-secondary);}
+.ttt-moves-summary ol { margin: 0 0 0 0.75rem; }
+
+.ttt-leaderboard-link {
+  margin-top: 1.6rem;
+}
+.ttt-leaderboard-link a {
+  font-weight: 500;
+  font-size: 1.08rem;
+}
+
+.ttt-leaderboard {
+  margin: 1.7rem 0 0.8rem;
+  border-collapse: collapse;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px 0 rgba(25, 118, 210, 0.03);
+}
+.ttt-leaderboard th, .ttt-leaderboard td {
+  border: 1px solid var(--color-border);
+  padding: 0.75rem 1.2rem;
+}
+.ttt-leaderboard th {
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 500;
+}
+.ttt-leaderboard td {
+  text-align: center;
+  font-size: 1.09rem;
+}
+
+.ttt-history-list { list-style: none; padding-left: 0.5em; }
+.ttt-history-list li { 
+  margin-bottom: 0.75rem;
+  font-size: 1.10rem;
+}
+.win-text { color: var(--color-primary); font-weight: bold; }
+.loss-text { color: #d32f2f; }
+.draw-text { color: var(--color-accent); }
